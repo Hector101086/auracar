@@ -13,7 +13,7 @@ import java.time.Instant;
         @Index(name = "car_carregistration_index", columnList = "carregistration"),
         @Index(name = "car_model_index", columnList = "model")
 })
-public class Car {
+public class CarEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)

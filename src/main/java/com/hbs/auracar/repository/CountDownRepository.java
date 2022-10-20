@@ -1,9 +1,9 @@
 package com.hbs.auracar.repository;
 
-import com.hbs.auracar.repository.entity.CarEntity;
+import com.hbs.auracar.repository.entity.CountDownEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CarRepository extends JpaRepository<CarEntity, Long> {
+public interface CountDownRepository extends JpaRepository<CountDownEntity, Long> {
 }

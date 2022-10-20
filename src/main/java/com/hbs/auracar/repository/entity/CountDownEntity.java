@@ -12,7 +12,7 @@ import java.time.Instant;
 @Table(name = "countdown", indexes = {
         @Index(name = "countdown_id_carid_pk", columnList = "id, carid", unique = true)
 })
-public class Countdown {
+public class CountDownEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -20,7 +20,7 @@ public class Countdown {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "carid", nullable = false)
-    private Car carId;
+    private CarEntity carEntityId;
 
     @Column(name = "startdate", nullable = false)
     private Instant startDate;
