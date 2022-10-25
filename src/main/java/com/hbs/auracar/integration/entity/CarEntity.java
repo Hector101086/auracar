@@ -1,4 +1,4 @@
-package com.hbs.auracar.repository.entity;
+package com.hbs.auracar.integration.entity;
 
 import lombok.Getter;
 import lombok.Setter;

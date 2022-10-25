@@ -1,6 +1,6 @@
-package com.hbs.auracar.repository;
+package com.hbs.auracar.integration.repository;
 
-import com.hbs.auracar.repository.entity.CarEntity;
+import com.hbs.auracar.integration.entity.CarEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
