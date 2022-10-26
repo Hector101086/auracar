@@ -8,7 +8,7 @@ create sequence countdown_seq
 
 alter sequence countdown_seq owner to admin;
 
-create table if not exists car
+create table car
 (
     id              integer default nextval('cars_seq'::regclass) not null
         constraint car_pk
@@ -24,26 +24,9 @@ alter table car
 
 alter sequence cars_seq owned by car.id;
 
-create index if not exists car_carregistration_index
+create index car_carregistration_index
     on car (carregistration);
 
-create index if not exists car_model_index
+create index car_model_index
     on car (model);
-
-create table if not exists countdown
-(
-    id        integer default nextval('countdown_seq'::regclass) not null
-        constraint countdown_pk
-            primary key,
-    carid     integer                                            not null
-        constraint countdown_car_null_fk
-            references car,
-    startdate timestamp                                          not null,
-    enddate   timestamp                                          not null,
-    constraint countdown_id_carid_pk
-        unique (id, carid)
-);
-
-alter table countdown
-    owner to admin;
 
