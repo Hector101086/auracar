@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 public class ApiError {
     private HttpStatus status;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
+    @JsonFormat( shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss" )
     private LocalDateTime timestamp;
     private String code;
     private String exceptionMessage;
@@ -20,7 +20,7 @@ public class ApiError {
         return descriptionURL;
     }
 
-    public void setDescriptionURL(String descriptionURL) {
+    public void setDescriptionURL( String descriptionURL ) {
         this.descriptionURL = descriptionURL;
     }
 
@@ -28,22 +28,22 @@ public class ApiError {
         timestamp = LocalDateTime.now();
     }
 
-    public ApiError setStatus(HttpStatus status) {
+    public ApiError setStatus( HttpStatus status ) {
         this.status = status;
         return this;
     }
 
-    public ApiError setCode(String code) {
+    public ApiError setCode( String code ) {
         this.code = code;
         return this;
     }
 
-    public ApiError setExceptionMessage(String exceptionMessage) {
+    public ApiError setExceptionMessage( String exceptionMessage ) {
         this.exceptionMessage = exceptionMessage;
         return this;
     }
 
-    public ApiError setStackTrace(String stackTrace) {
+    public ApiError setStackTrace( String stackTrace ) {
         this.stackTrace = stackTrace;
         return this;
     }
@@ -68,13 +68,13 @@ public class ApiError {
         return stackTrace;
     }
 
-    public ApiError setMessageFromThrowable(Throwable ex) {
+    public ApiError setMessageFromThrowable( Throwable ex ) {
         this.exceptionMessage = ex.getLocalizedMessage();
         return this;
     }
 
-    public ApiError setStackFromThrowable(Throwable ex) {
-        this.stackTrace = ExceptionUtils.getStackTrace(ex);
+    public ApiError setStackFromThrowable( Throwable ex ) {
+        this.stackTrace = ExceptionUtils.getStackTrace( ex );
         return this;
     }
 
@@ -82,7 +82,7 @@ public class ApiError {
         return requestKey;
     }
 
-    public ApiError setRequestKey(String requestKey) {
+    public ApiError setRequestKey( String requestKey ) {
         this.requestKey = requestKey;
         return this;
     }

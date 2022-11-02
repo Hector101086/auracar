@@ -2,35 +2,27 @@ package com.hbs.auracar.integration.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
 
-import javax.persistence.*;
 import java.time.Instant;
 
 @Getter
 @Setter
-@Entity
-@Table(name = "car", indexes = {
-        @Index(name = "car_carregistration_index", columnList = "carregistration"),
-        @Index(name = "car_model_index", columnList = "model")
-})
+@Table( name = "car" )
 public class CarEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Integer id;
-
-    @Lob
-    @Column(name = "model", nullable = false)
+    @Column( "id" )
+    private Long id;
+    @Column( "model" )
     private String model;
-
-    @Lob
-    @Column(name = "carregistration", nullable = false)
+    @Column( "carregistration" )
     private String carRegistration;
-
-    @Column(name = "entry", nullable = false)
+    @Column( "entry" )
     private Instant entry;
-
-    @Column(name = "exit")
+    @Column( "exit" )
     private Instant exit;
-
+    @Column( "active" )
+    private Boolean active;
 }

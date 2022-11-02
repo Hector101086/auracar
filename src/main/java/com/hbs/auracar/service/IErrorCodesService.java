@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 public interface IErrorCodesService {
-
     /**
      * Class to represent an Error Code Description in JSON
      */
@@ -13,7 +12,6 @@ public interface IErrorCodesService {
     class ErrorCode {
         private String message;
         private String troubleshoot;
-
     }
 
     /**
@@ -22,7 +20,7 @@ public interface IErrorCodesService {
      * @param languages Language codes
      * @return string of the JSON object
      */
-    String getCodes(String languages);
+    String getCodes( String languages );
 
     /**
      * Get the object describing a given error code
@@ -31,5 +29,5 @@ public interface IErrorCodesService {
      * @param code      Error code
      * @return ErrorCode object
      */
-    ErrorCode getCodeDescription(String languages, String code);
+    ErrorCode getCodeDescription( String languages, String code );
 }

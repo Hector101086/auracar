@@ -16,7 +16,8 @@ create table car
     model           varchar                                       not null,
     carregistration varchar                                       not null,
     entry           timestamp                                     not null,
-    exit            timestamp
+    exit            timestamp,
+    active          boolean                                       not null
 );
 
 alter table car

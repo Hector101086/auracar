@@ -1,0 +1,26 @@
+{
+  "BKE0000": {
+    "message": "API Backend Exception",
+    "troubleshoot": ""
+  },
+  "BKE0001": {
+    "message": "Error imprevisto realizando la peticion",
+    "troubleshoot": ""
+  },
+  "BKE0002": {
+    "message": "Error imprevisto recuperando automoviles",
+    "troubleshoot": ""
+  },
+  "BKE0003": {
+    "message": "Error imprevisto borrando automóvil",
+    "troubleshoot": ""
+  },
+  "BKE0004": {
+    "message": "Error imprevisto creando automóvil",
+    "troubleshoot": ""
+  },
+  "BKE0005": {
+    "message": "Error imprevisto actualizando automóvil",
+    "troubleshoot": ""
+  }
+}

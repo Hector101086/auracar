@@ -13,20 +13,20 @@ import reactor.core.publisher.Mono;
 public class ErrorCodesHandler {
     private final IErrorCodesService errorCodesService;
 
-    public ErrorCodesHandler(IErrorCodesService errorCodesService) {
+    public ErrorCodesHandler( IErrorCodesService errorCodesService ) {
         this.errorCodesService = errorCodesService;
     }
 
-    public Mono<ServerResponse> getCodes(ServerRequest serverRequest) {
+    public Mono<ServerResponse> getCodes( ServerRequest serverRequest ) {
         MultiValueMap<String, String> queryParams = serverRequest.queryParams();
         return ServerResponse.ok()
-                .bodyValue(errorCodesService.getCodes(queryParams.getFirst("lang")));
+            .bodyValue( errorCodesService.getCodes( queryParams.getFirst( "lang" ) ) );
     }
 
-    public Mono<ServerResponse> getCode(ServerRequest serverRequest) {
+    public Mono<ServerResponse> getCode( ServerRequest serverRequest ) {
         return ServerResponse.ok()
-                .bodyValue(errorCodesService.getCodeDescription(
-                        serverRequest.headers().firstHeader("languages"),
-                        serverRequest.pathVariable("code")));
+            .bodyValue( errorCodesService.getCodeDescription(
+                serverRequest.headers().firstHeader( "languages" ),
+                serverRequest.pathVariable( "code" ) ) );
     }
 }

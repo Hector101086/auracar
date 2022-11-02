@@ -7,7 +7,9 @@ import reactor.core.publisher.Mono;
 public interface ICarService {
     Flux<CarDto> getCars();
 
-    Mono<CarDto> deleteCar(Long idCare);
+    Mono<CarDto> deleteCar( Long idCare );
 
-    Mono<CarDto> createCar(Mono<CarDto> carDto);
+    Mono<CarDto> createCar( CarDto carDto );
+
+    Mono<CarDto> updateCar( CarDto carDto );
 }

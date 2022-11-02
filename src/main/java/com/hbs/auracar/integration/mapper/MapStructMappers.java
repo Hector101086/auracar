@@ -7,10 +7,4 @@ import org.springframework.stereotype.Component;
 @Component
 public class MapStructMappers {
     private final CarMapper carMapper;
-
-//    public static MapStructMappers newInstance() {
-//        return new MapStructMappers(
-//            new CarMapperImpl()
-//        );
-//    }
 }

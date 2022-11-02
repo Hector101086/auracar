@@ -1,5 +1,7 @@
 package com.hbs.auracar.service.impl;
 
+import com.hbs.auracar.config.exception.ApiException;
+import com.hbs.auracar.integration.entity.CarEntity;
 import com.hbs.auracar.integration.mapper.MapStructMappers;
 import com.hbs.auracar.integration.repository.CarRepository;
 import com.hbs.auracar.service.ICarService;
@@ -15,46 +17,49 @@ public class CarService implements ICarService {
     private final CarRepository carRepository;
     private final MapStructMappers mapStructMappers;
 
-    public CarService(CarRepository carRepository, MapStructMappers mapStructMappers) {
+    public CarService( CarRepository carRepository, MapStructMappers mapStructMappers ) {
         this.carRepository = carRepository;
         this.mapStructMappers = mapStructMappers;
     }
 
     @Override
     public Flux<CarDto> getCars() {
-//        return portCallsApi.getPortCalls( days, executionMode )
-//            .collectList()
-//            .filter( portCallDtos -> ! portCallDtos.isEmpty() )
-//            .switchIfEmpty( Mono.error( new ApiException( "BKE0002", "No data" ) ) )
-//            .map( ThrowingFunction.unchecked( objectMapper :: writeValueAsString ) )
-//            .map( kafkaProducer :: sendMessageOfficialPortCalls )
-//            .onErrorResume( error -> Mono.error( new ApiException( "BKE0002", error ) ) );
-        return carRepository.findAll().map(carEntity -> mapStructMappers.getCarMapper().toDto(carEntity));
+        return carRepository.findByActive( true )
+            .switchIfEmpty( Mono.error( new ApiException( "BKE0002", "No data" ) ) )
+            .map( carEntity -> mapStructMappers.getCarMapper().toDto( carEntity ) )
+            .onErrorResume( error -> Mono.error( new ApiException( "BKE0002", error ) ) );
     }
 
     @Override
-    public Mono<CarDto> deleteCar(Long idCare) {
-//        return iotAdapter.getExpectedArrivals( timespan, portId, shipType, executionMode )
-//            .collectList()
-//            .filter( nonOfficialBerthingDtos -> ! nonOfficialBerthingDtos.isEmpty() )
-//            .switchIfEmpty( Mono.error( new ApiException( "BKE0003", "No data" ) ) )
-//            .map( ThrowingFunction.unchecked( objectMapper :: writeValueAsString ) )
-//            .map( kafkaProducer :: sendMessageNonOfficialBerthings )
-//            .onErrorResume( error -> Mono.error( new ApiException( "BKE0003", error ) ) );
-
-        carRepository.deleteById(idCare);
-        return null;
+    public Mono<CarDto> createCar( CarDto carDto ) {
+        carDto.setId( null );
+        return carRepository.save( mapStructMappers.getCarMapper().toEntity( carDto ) )
+            .map( carEntity -> mapStructMappers.getCarMapper().toDto( carEntity ) )
+            .onErrorResume( error -> Mono.error( new ApiException( "BKE0004", error ) ) );
     }
 
     @Override
-    public Mono<CarDto> createCar(Mono<CarDto> carDto) {
-//        return iotAdapter.getExpectedArrivals( timespan, portId, shipType, executionMode )
-//                .collectList()
-//                .filter( nonOfficialBerthingDtos -> ! nonOfficialBerthingDtos.isEmpty() )
-//                .switchIfEmpty( Mono.error( new ApiException( "BKE0003", "No data" ) ) )
-//                .map( ThrowingFunction.unchecked( objectMapper :: writeValueAsString ) )
-//                .map( kafkaProducer :: sendMessageNonOfficialBerthings )
-//                .onErrorResume( error -> Mono.error( new ApiException( "BKE0003", error ) ) );
-        return null;
+    public Mono<CarDto> deleteCar( Long idCar ) {
+        return carRepository.findById( idCar )
+            .switchIfEmpty( Mono.error( new ApiException( "BKE0003", "Car with id not found: " + idCar ) ) )
+            .flatMap( carEntity -> {
+                carEntity.setActive( false );
+                return carRepository.save( carEntity );
+            } )
+            .map( carEntitySave -> mapStructMappers.getCarMapper().toDto( carEntitySave ) )
+            .onErrorResume( error -> Mono.error( new ApiException( "BKE0003", error ) ) );
+    }
+
+    @Override
+    public Mono<CarDto> updateCar( CarDto carDto ) {
+        return carRepository.findById( carDto.getId() )
+            .switchIfEmpty( Mono.error( new ApiException( "BKE0005", "Car with id not found: " + carDto.getId() ) ) )
+            .flatMap( carEntityPrevious -> {
+                CarEntity carEntity = mapStructMappers.getCarMapper().toEntity( carDto );
+                mapStructMappers.getCarMapper().update( carEntity, carEntityPrevious );
+                return carRepository.save( carEntityPrevious );
+            } )
+            .map( carEntitySave -> mapStructMappers.getCarMapper().toDto( carEntitySave ) )
+            .onErrorResume( error -> Mono.error( new ApiException( "BKE0005", error ) ) );
     }
 }

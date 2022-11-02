@@ -16,15 +16,11 @@ import java.util.*;
 
 @Service
 public class ErrorCodesService implements IErrorCodesService {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(ErrorCodesService.class);
-
+    private static final Logger LOGGER = LoggerFactory.getLogger( ErrorCodesService.class );
     List<Locale> locales = Arrays.asList(
-            new Locale("es"),
-            new Locale("en")
+        new Locale( "es" ),
+        new Locale( "en" )
     );
-
-
     private Map<Locale, String> codes = new HashMap<>();
     private Map<Locale, Map<String, ErrorCode>> descriptions = new HashMap<>();
 
@@ -34,49 +30,51 @@ public class ErrorCodesService implements IErrorCodesService {
      */
     @PostConstruct
     public void init() {
-        for (Locale locale : locales) {
+        for( Locale locale : locales ) {
             ObjectMapper objectMapper = new ObjectMapper();
             ResourceLoader resourceLoader = new DefaultResourceLoader();
-            Resource resource = resourceLoader.getResource("classpath:errorCodes." + locale.getLanguage() + ".json");
+            Resource resource = resourceLoader.getResource( "classpath:errorCodes." + locale.getLanguage() + ".json" );
             try {
-                codes.put(locale, new String(resource.getInputStream().readAllBytes()));
+                codes.put( locale, new String( resource.getInputStream().readAllBytes() ) );
                 descriptions.put(
-                        locale,
-                        objectMapper.readValue(resource.getInputStream().readAllBytes(), new TypeReference<Map<String, ErrorCode>>() {
-                        })
+                    locale,
+                    objectMapper.readValue( resource.getInputStream().readAllBytes(),
+                        new TypeReference<Map<String, ErrorCode>>() {
+                        } )
                 );
-            } catch (IOException e) {
-                codes.put(locale, "{}");
+            }
+            catch( IOException e ) {
+                codes.put( locale, "{}" );
                 descriptions.put(
-                        locale,
-                        new HashMap<>()
+                    locale,
+                    new HashMap<>()
                 );
-                LOGGER.error(e.getLocalizedMessage());
+                LOGGER.error( e.getLocalizedMessage() );
             }
         }
     }
 
-    private Locale getLocale(String languages) {
-        if (languages == null) {
-            languages = locales.get(0).getLanguage();
+    private Locale getLocale( String languages ) {
+        if( languages == null ) {
+            languages = locales.get( 0 ).getLanguage();
         }
-        List<Locale.LanguageRange> ranges = Locale.LanguageRange.parse(languages);
-        Locale locale = Locale.lookup(ranges, locales);
-        if (locale == null) {
-            locale = locales.get(0);
+        List<Locale.LanguageRange> ranges = Locale.LanguageRange.parse( languages );
+        Locale locale = Locale.lookup( ranges, locales );
+        if( locale == null ) {
+            locale = locales.get( 0 );
         }
         return locale;
     }
 
     @Override
-    public String getCodes(String languages) {
-        Locale locale = getLocale(languages);
-        return this.codes.get(locale);
+    public String getCodes( String languages ) {
+        Locale locale = getLocale( languages );
+        return this.codes.get( locale );
     }
 
     @Override
-    public ErrorCode getCodeDescription(String languages, String code) {
-        Locale locale = getLocale(languages);
-        return descriptions.get(locale).get(code);
+    public ErrorCode getCodeDescription( String languages, String code ) {
+        Locale locale = getLocale( languages );
+        return descriptions.get( locale ).get( code );
     }
 }
