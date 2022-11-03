@@ -26,6 +26,14 @@ public class CarHandler {
             iCarService.getCars(), CarDto.class );
     }
 
+    public Mono<ServerResponse> getCar( ServerRequest serverRequest ) {
+        MultiValueMap<String, String> queryParams = serverRequest.queryParams();
+        log.info( "Recovery Car" );
+        return ServerResponse.ok().body(
+            iCarService.getCar( Long.valueOf( Objects.requireNonNull( queryParams.getFirst( "idCar" ) ) ) ),
+            CarDto.class );
+    }
+
     public Mono<ServerResponse> deleteCar( ServerRequest serverRequest ) {
         MultiValueMap<String, String> queryParams = serverRequest.queryParams();
         log.info( "Delete car" );
@@ -43,7 +51,7 @@ public class CarHandler {
 
     public Mono<ServerResponse> updateCar( ServerRequest serverRequest ) {
         Mono<CarDto> carDto = serverRequest.bodyToMono( CarDto.class );
-        log.info( "Create car" );
+        log.info( "Update car" );
         return ServerResponse.ok().body( carDto.flatMap( iCarService :: updateCar )
             , CarDto.class );
     }

@@ -31,6 +31,14 @@ public class CarService implements ICarService {
     }
 
     @Override
+    public Mono<CarDto> getCar( Long IdCar ) {
+        return carRepository.findByIdAndActive( IdCar, true )
+            .switchIfEmpty( Mono.error( new ApiException( "BKE0002", "No data" ) ) )
+            .map( carEntity -> mapStructMappers.getCarMapper().toDto( carEntity ) )
+            .onErrorResume( error -> Mono.error( new ApiException( "BKE0002", error ) ) );
+    }
+
+    @Override
     public Mono<CarDto> createCar( CarDto carDto ) {
         carDto.setId( null );
         return carRepository.save( mapStructMappers.getCarMapper().toEntity( carDto ) )

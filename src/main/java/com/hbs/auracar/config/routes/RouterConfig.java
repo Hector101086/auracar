@@ -30,7 +30,7 @@ public class RouterConfig {
     @Bean
     @RouterOperations(
         {
-            @RouterOperation( path = "/api/v1", produces = { MediaType.APPLICATION_JSON_VALUE },
+            @RouterOperation( path = "/api/v1/cars", produces = { MediaType.APPLICATION_JSON_VALUE },
                 method = RequestMethod.GET, beanClass = CarHandler.class, beanMethod = "getCars",
                 operation = @Operation( operationId = "getCars",
                     summary = "Car list", tags = { "Cars" }, responses = {
@@ -45,7 +45,24 @@ public class RouterConfig {
                         content = @Content( schema = @Schema( implementation = ApiError.class ) ) ) }
                 )
             ),
-            @RouterOperation( path = "/api/v1", produces = { MediaType.APPLICATION_JSON_VALUE },
+            @RouterOperation( path = "/api/v1/car", produces = { MediaType.APPLICATION_JSON_VALUE },
+                method = RequestMethod.GET, beanClass = CarHandler.class, beanMethod = "getCar",
+                operation = @Operation( operationId = "getCar",
+                    summary = "Car list", tags = { "Cars" }, responses = {
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "200",
+                        description = "Successful operation",
+                        content = @Content( schema = @Schema( implementation = CarDto.class ) ) ),
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "400",
+                        description = "Bad Request",
+                        content = @Content( schema = @Schema( implementation = ApiError.class ) ) ),
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "500",
+                        description = "Internal server error",
+                        content = @Content( schema = @Schema( implementation = ApiError.class ) ) ) }, parameters = {
+                    @Parameter( required = true, in = ParameterIn.QUERY, name = "idCar",
+                        schema = @Schema( type = "string" ) ) }
+                )
+            ),
+            @RouterOperation( path = "/api/v1/car", produces = { MediaType.APPLICATION_JSON_VALUE },
                 method = RequestMethod.DELETE, beanClass = CarHandler.class, beanMethod = "deleteCar",
                 operation = @Operation( operationId = "deleteCar",
                     summary = "Delete car", tags = { "Cars" }, responses = {
@@ -62,7 +79,7 @@ public class RouterConfig {
                         schema = @Schema( type = "string" ) ) }
                 )
             ),
-            @RouterOperation( path = "/api/v1", produces = { MediaType.APPLICATION_JSON_VALUE },
+            @RouterOperation( path = "/api/v1/car", produces = { MediaType.APPLICATION_JSON_VALUE },
                 method = RequestMethod.POST, beanClass = CarHandler.class, beanMethod = "createCar",
                 operation = @Operation( operationId = "createCar",
                     summary = "Create car", tags = { "Cars" }, responses = {
@@ -79,7 +96,7 @@ public class RouterConfig {
                         content = @Content( schema = @Schema( implementation = CarDto.class ) ) )
                 )
             ),
-            @RouterOperation( path = "/api/v1", produces = { MediaType.APPLICATION_JSON_VALUE },
+            @RouterOperation( path = "/api/v1/car", produces = { MediaType.APPLICATION_JSON_VALUE },
                 method = RequestMethod.PATCH, beanClass = CarHandler.class, beanMethod = "updateCar",
                 operation = @Operation( operationId = "updateCar",
                     summary = "Update car", tags = { "Cars" }, responses = {
@@ -98,10 +115,11 @@ public class RouterConfig {
             )
         } )
     public RouterFunction<ServerResponse> routerCars( CarHandler carHandler ) {
-        return RouterFunctions.route( GET( "/api/v1" ), carHandler :: getCars )
-            .andRoute( DELETE( "/api/v1" ), carHandler :: deleteCar )
-            .andRoute( POST( "/api/v1" ), carHandler :: createCar )
-            .andRoute( PATCH( "/api/v1" ), carHandler :: updateCar );
+        return RouterFunctions.route( GET( "/api/v1/cars" ), carHandler :: getCars )
+            .andRoute( GET( "/api/v1/car" ), carHandler :: getCar )
+            .andRoute( DELETE( "/api/v1/car" ), carHandler :: deleteCar )
+            .andRoute( POST( "/api/v1/car" ), carHandler :: createCar )
+            .andRoute( PATCH( "/api/v1/car" ), carHandler :: updateCar );
     }
 
     @Bean
