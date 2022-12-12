@@ -48,7 +48,7 @@ public class RouterConfig {
             @RouterOperation( path = "/api/v1/car", produces = { MediaType.APPLICATION_JSON_VALUE },
                 method = RequestMethod.GET, beanClass = CarHandler.class, beanMethod = "getCar",
                 operation = @Operation( operationId = "getCar",
-                    summary = "Car list", tags = { "Cars" }, responses = {
+                    summary = "Get car", tags = { "Cars" }, responses = {
                     @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "200",
                         description = "Successful operation",
                         content = @Content( schema = @Schema( implementation = CarDto.class ) ) ),
