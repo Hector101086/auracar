@@ -18,5 +18,6 @@ public class CarDto {
     private Instant entryTime;
     @JsonFormat( shape = JsonFormat.Shape.STRING, pattern = "HH:mm", timezone = "Europe/Madrid" )
     private Instant exitTime;
+    private Long countdown;
     private Boolean active;
 }

@@ -16,7 +16,7 @@ create table car
     model           varchar                                       not null,
     carregistration varchar                                       not null,
     entry           timestamp                                     not null,
-    exit            timestamp,
+    exit            timestamp                                     not null,
     active          boolean                                       not null
 );
 
