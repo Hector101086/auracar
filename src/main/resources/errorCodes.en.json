@@ -1,0 +1,26 @@
+{
+  "BKE0000": {
+    "message": "API Backend Exception",
+    "troubleshoot": ""
+  },
+  "BKE0001": {
+    "message": "Unexpected server error",
+    "troubleshoot": ""
+  },
+  "BKE0002": {
+    "message": "Error while retrieving cars",
+    "troubleshoot": ""
+  },
+  "BKE0003": {
+    "message": "Error while delete car",
+    "troubleshoot": ""
+  },
+  "BKE0004": {
+    "message": "Error while create car",
+    "troubleshoot": ""
+  },
+  "BKE0005": {
+    "message": "Error while update car",
+    "troubleshoot": ""
+  }
+}

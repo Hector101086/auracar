@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class AuracarApplication {
-    public static void main(String[] args) {
-        SpringApplication.run(AuracarApplication.class, args);
+    public static void main( String[] args ) {
+        SpringApplication.run( AuracarApplication.class, args );
     }
 }
