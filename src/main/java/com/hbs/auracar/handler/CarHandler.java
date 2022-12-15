@@ -4,7 +4,6 @@ import com.hbs.auracar.service.ICarService;
 import com.hbs.auracar.service.dto.CarDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
@@ -27,19 +26,15 @@ public class CarHandler {
     }
 
     public Mono<ServerResponse> getCar( ServerRequest serverRequest ) {
-        MultiValueMap<String, String> queryParams = serverRequest.queryParams();
         log.info( "Recovery Car" );
-        return ServerResponse.ok().body(
-            iCarService.getCar( Long.valueOf( Objects.requireNonNull( queryParams.getFirst( "idCar" ) ) ) ),
-            CarDto.class );
+        return ServerResponse.ok().body( iCarService.getCar(
+            Long.valueOf( Objects.requireNonNull( serverRequest.pathVariable( "id" ) ) ) ), CarDto.class );
     }
 
     public Mono<ServerResponse> deleteCar( ServerRequest serverRequest ) {
-        MultiValueMap<String, String> queryParams = serverRequest.queryParams();
         log.info( "Delete car" );
         return ServerResponse.ok().body( iCarService.deleteCar(
-                Long.valueOf( Objects.requireNonNull( queryParams.getFirst( "idCar" ) ) ) )
-            , CarDto.class );
+            Long.valueOf( Objects.requireNonNull( serverRequest.pathVariable( "id" ) ) ) ), CarDto.class );
     }
 
     public Mono<ServerResponse> createCar( ServerRequest serverRequest ) {

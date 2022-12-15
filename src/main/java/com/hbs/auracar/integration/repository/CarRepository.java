@@ -8,7 +8,7 @@ import reactor.core.publisher.Mono;
 
 @Repository
 public interface CarRepository extends ReactiveCrudRepository<CarEntity, Long> {
-    Flux<CarEntity> findByActive( Boolean active );
+    Flux<CarEntity> findByActiveOrderById( Boolean active );
 
-    Mono<CarEntity> findByIdAndActive( Long id, Boolean active );
+    Mono<CarEntity> findByIdAndActiveOrderById( Long id, Boolean active );
 }

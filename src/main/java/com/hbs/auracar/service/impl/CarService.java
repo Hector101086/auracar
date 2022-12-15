@@ -24,16 +24,14 @@ public class CarService implements ICarService {
 
     @Override
     public Flux<CarDto> getCars() {
-        return carRepository.findByActive( true )
-            .switchIfEmpty( Mono.error( new ApiException( "BKE0002", "No data" ) ) )
+        return carRepository.findByActiveOrderById( true )
             .map( carEntity -> mapStructMappers.getCarMapper().toDto( carEntity ) )
             .onErrorResume( error -> Mono.error( new ApiException( "BKE0002", error ) ) );
     }
 
     @Override
     public Mono<CarDto> getCar( Long IdCar ) {
-        return carRepository.findByIdAndActive( IdCar, true )
-            .switchIfEmpty( Mono.error( new ApiException( "BKE0002", "No data" ) ) )
+        return carRepository.findByIdAndActiveOrderById( IdCar, true )
             .map( carEntity -> mapStructMappers.getCarMapper().toDto( carEntity ) )
             .onErrorResume( error -> Mono.error( new ApiException( "BKE0002", error ) ) );
     }

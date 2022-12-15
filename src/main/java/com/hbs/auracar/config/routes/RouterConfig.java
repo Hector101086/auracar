@@ -45,7 +45,7 @@ public class RouterConfig {
                         content = @Content( schema = @Schema( implementation = ApiError.class ) ) ) }
                 )
             ),
-            @RouterOperation( path = "/api/v1/car", produces = { MediaType.APPLICATION_JSON_VALUE },
+            @RouterOperation( path = "/api/v1/car/{id}", produces = { MediaType.APPLICATION_JSON_VALUE },
                 method = RequestMethod.GET, beanClass = CarHandler.class, beanMethod = "getCar",
                 operation = @Operation( operationId = "getCar",
                     summary = "Get car", tags = { "Cars" }, responses = {
@@ -58,11 +58,11 @@ public class RouterConfig {
                     @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "500",
                         description = "Internal server error",
                         content = @Content( schema = @Schema( implementation = ApiError.class ) ) ) }, parameters = {
-                    @Parameter( required = true, in = ParameterIn.QUERY, name = "idCar",
+                    @Parameter( required = true, in = ParameterIn.PATH, name = "id",
                         schema = @Schema( type = "string" ) ) }
                 )
             ),
-            @RouterOperation( path = "/api/v1/car", produces = { MediaType.APPLICATION_JSON_VALUE },
+            @RouterOperation( path = "/api/v1/car/{id}", produces = { MediaType.APPLICATION_JSON_VALUE },
                 method = RequestMethod.DELETE, beanClass = CarHandler.class, beanMethod = "deleteCar",
                 operation = @Operation( operationId = "deleteCar",
                     summary = "Delete car", tags = { "Cars" }, responses = {
@@ -75,7 +75,7 @@ public class RouterConfig {
                     @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "500",
                         description = "Internal server error",
                         content = @Content( schema = @Schema( implementation = ApiError.class ) ) ) }, parameters = {
-                    @Parameter( required = true, in = ParameterIn.QUERY, name = "idCar",
+                    @Parameter( required = true, in = ParameterIn.PATH, name = "id",
                         schema = @Schema( type = "string" ) ) }
                 )
             ),
@@ -116,8 +116,8 @@ public class RouterConfig {
         } )
     public RouterFunction<ServerResponse> routerCars( CarHandler carHandler ) {
         return RouterFunctions.route( GET( "/api/v1/cars" ), carHandler :: getCars )
-            .andRoute( GET( "/api/v1/car" ), carHandler :: getCar )
-            .andRoute( DELETE( "/api/v1/car" ), carHandler :: deleteCar )
+            .andRoute( GET( "/api/v1/car/{id}" ), carHandler :: getCar )
+            .andRoute( DELETE( "/api/v1/car/{id}" ), carHandler :: deleteCar )
             .andRoute( POST( "/api/v1/car" ), carHandler :: createCar )
             .andRoute( PATCH( "/api/v1/car" ), carHandler :: updateCar );
     }
