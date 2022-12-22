@@ -17,17 +17,12 @@ create table car
     carregistration varchar                                       not null,
     entry           timestamp                                     not null,
     exit            timestamp                                     not null,
-    active          boolean                                       not null
+    active          boolean                                       not null,
+    adviser         varchar
 );
 
 alter table car
     owner to admin;
 
 alter sequence cars_seq owned by car.id;
-
-create index car_carregistration_index
-    on car (carregistration);
-
-create index car_model_index
-    on car (model);
 

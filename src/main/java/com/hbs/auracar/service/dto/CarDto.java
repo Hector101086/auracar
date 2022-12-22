@@ -20,4 +20,5 @@ public class CarDto {
     private Instant exitTime;
     private Long countdown;
     private Boolean active;
+    private String adviser;
 }
