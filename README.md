@@ -16,11 +16,6 @@
 
 3. Ejecutar con IDE
 
-4. Acceder a Swagger o al componente mediante Postman
-
-```bash     
-   http://integrator.dev.grupo-cps.com/swagger-ui.html
-```
 
 ## API Reference
 
