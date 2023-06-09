@@ -1,7 +1,7 @@
 package com.hbs.auracar.handler;
 
 import com.hbs.auracar.service.ICarService;
-import com.hbs.auracar.service.dto.CarDto;
+import com.hbs.auracar.service.dto.Car;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
@@ -22,33 +22,33 @@ public class CarHandler {
     public Mono<ServerResponse> getCars( ServerRequest serverRequest ) {
         log.info( "Recovery Cars" );
         return ServerResponse.ok().body(
-            iCarService.getCars(), CarDto.class );
+            iCarService.getCars(), Car.class );
     }
 
     public Mono<ServerResponse> getCar( ServerRequest serverRequest ) {
         log.info( "Recovery Car" );
         return ServerResponse.ok().body( iCarService.getCar(
-            Long.valueOf( Objects.requireNonNull( serverRequest.pathVariable( "id" ) ) ) ), CarDto.class );
+            Long.valueOf( Objects.requireNonNull( serverRequest.pathVariable( "id" ) ) ) ), Car.class );
     }
 
     public Mono<ServerResponse> deleteCar( ServerRequest serverRequest ) {
         log.info( "Delete car" );
         return ServerResponse.ok().body( iCarService.deleteCar(
-            Long.valueOf( Objects.requireNonNull( serverRequest.pathVariable( "id" ) ) ) ), CarDto.class );
+            Long.valueOf( Objects.requireNonNull( serverRequest.pathVariable( "id" ) ) ) ), Car.class );
     }
 
     public Mono<ServerResponse> createCar( ServerRequest serverRequest ) {
-        Mono<CarDto> carDto = serverRequest.bodyToMono( CarDto.class );
+        Mono<Car> carDto = serverRequest.bodyToMono( Car.class );
         log.info( "Create car" );
         return ServerResponse.ok().body( carDto.flatMap( iCarService :: createCar )
-            , CarDto.class );
+            , Car.class );
     }
 
     public Mono<ServerResponse> updateCar( ServerRequest serverRequest ) {
-        Mono<CarDto> carDto = serverRequest.bodyToMono( CarDto.class );
+        Mono<Car> carDto = serverRequest.bodyToMono( Car.class );
         log.info( "Update car" );
         return ServerResponse.ok().body( carDto.flatMap( iCarService :: updateCar )
-            , CarDto.class );
+            , Car.class );
     }
 }
 

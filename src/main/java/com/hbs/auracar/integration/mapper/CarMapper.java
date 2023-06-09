@@ -1,7 +1,7 @@
 package com.hbs.auracar.integration.mapper;
 
-import com.hbs.auracar.integration.entity.CarEntity;
-import com.hbs.auracar.service.dto.CarDto;
+import com.hbs.auracar.integration.model.CarEntity;
+import com.hbs.auracar.service.dto.Car;
 import org.mapstruct.*;
 
 import java.time.Instant;
@@ -12,29 +12,29 @@ public interface CarMapper {
     @Mapping( target = "id", ignore = true )
     @Mapping( source = "entryTime", target = "entry" )
     @Mapping( source = "exitTime", target = "exit" )
-    CarEntity toEntity( CarDto carDto );
+    CarEntity toEntity( Car car );
 
     @BeforeMapping
-    default void beforeMapping( CarDto carDto ) {
+    default void beforeMapping( Car car ) {
         Instant entry = Instant.now();
-        Instant exit = entry.plusSeconds( carDto.getCountdown() * 60 );
-        if( carDto.getEntryTime() == null ) {
-            carDto.setEntryTime( entry );
+        Instant exit = entry.plusSeconds( car.getCountdown() * 60 );
+        if( car.getEntryTime() == null ) {
+            car.setEntryTime( entry );
         }
-        if( carDto.getExitTime() == null ) {
-            carDto.setExitTime( exit );
+        if( car.getExitTime() == null ) {
+            car.setExitTime( exit );
         }
     }
 
     @Mapping( source = "entry", target = "arrivalDay" )
     @Mapping( source = "entry", target = "entryTime" )
     @Mapping( source = "exit", target = "exitTime" )
-    CarDto toDto( CarEntity carEntity );
+    Car toDto( CarEntity carEntity );
 
     @AfterMapping
-    default void afterMapping( @MappingTarget CarDto carDto ) {
-        long minutes = ChronoUnit.MINUTES.between( Instant.now(), carDto.getExitTime() );
-        carDto.setCountdown( minutes <= 0 ? 0 : minutes );
+    default void afterMapping( @MappingTarget Car car ) {
+        long minutes = ChronoUnit.MINUTES.between( Instant.now(), car.getExitTime() );
+        car.setCountdown( minutes <= 0 ? 0 : minutes );
     }
 
     void update( CarEntity carEntity, @MappingTarget CarEntity previousCarEntity );

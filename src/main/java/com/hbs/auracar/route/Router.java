@@ -1,10 +1,10 @@
-package com.hbs.auracar.config.routes;
+package com.hbs.auracar.route;
 
 import com.hbs.auracar.handler.CarHandler;
 import com.hbs.auracar.handler.ErrorCodesHandler;
 import com.hbs.auracar.service.IErrorCodesService;
 import com.hbs.auracar.service.dto.ApiError;
-import com.hbs.auracar.service.dto.CarDto;
+import com.hbs.auracar.service.dto.Car;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -26,7 +26,7 @@ import static org.springframework.web.reactive.function.server.RequestPredicates
 
 @Slf4j
 @Configuration
-public class RouterConfig {
+public class Router {
     @Bean
     @RouterOperations(
         {
@@ -36,7 +36,7 @@ public class RouterConfig {
                     summary = "Car list", tags = { "Cars" }, responses = {
                     @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "200",
                         description = "Successful operation",
-                        content = @Content( schema = @Schema( implementation = CarDto.class ) ) ),
+                        content = @Content( schema = @Schema( implementation = Car.class ) ) ),
                     @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "400",
                         description = "Bad Request",
                         content = @Content( schema = @Schema( implementation = ApiError.class ) ) ),
@@ -51,7 +51,7 @@ public class RouterConfig {
                     summary = "Get car", tags = { "Cars" }, responses = {
                     @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "200",
                         description = "Successful operation",
-                        content = @Content( schema = @Schema( implementation = CarDto.class ) ) ),
+                        content = @Content( schema = @Schema( implementation = Car.class ) ) ),
                     @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "400",
                         description = "Bad Request",
                         content = @Content( schema = @Schema( implementation = ApiError.class ) ) ),
@@ -93,7 +93,7 @@ public class RouterConfig {
                         description = "Internal server error",
                         content = @Content( schema = @Schema( implementation = ApiError.class ) ) ) },
                     requestBody = @RequestBody( required = true, description = "Enter Request body as Json Object",
-                        content = @Content( schema = @Schema( implementation = CarDto.class ) ) )
+                        content = @Content( schema = @Schema( implementation = Car.class ) ) )
                 )
             ),
             @RouterOperation( path = "/api/v1/car", produces = { MediaType.APPLICATION_JSON_VALUE },
@@ -110,7 +110,7 @@ public class RouterConfig {
                         description = "Internal server error",
                         content = @Content( schema = @Schema( implementation = ApiError.class ) ) ) },
                     requestBody = @RequestBody( required = true, description = "Enter Request body as Json Object",
-                        content = @Content( schema = @Schema( implementation = CarDto.class ) ) )
+                        content = @Content( schema = @Schema( implementation = Car.class ) ) )
                 )
             )
         } )

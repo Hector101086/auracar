@@ -1,6 +1,6 @@
 package com.hbs.auracar.integration.repository;
 
-import com.hbs.auracar.integration.entity.CarEntity;
+import com.hbs.auracar.integration.model.CarEntity;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;

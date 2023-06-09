@@ -1,5 +1,6 @@
-package com.hbs.auracar.config.exception;
+package com.hbs.auracar.handler;
 
+import com.hbs.auracar.exception.ApiException;
 import com.hbs.auracar.service.dto.ApiError;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.web.WebProperties;
