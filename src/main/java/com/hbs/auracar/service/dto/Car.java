@@ -8,7 +8,7 @@ import java.time.Instant;
 
 @Getter
 @Setter
-public class CarDto {
+public class Car {
     private Long id;
     private String model;
     private String carRegistration;
@@ -20,4 +20,5 @@ public class CarDto {
     private Instant exitTime;
     private Long countdown;
     private Boolean active;
+    private String adviser;
 }

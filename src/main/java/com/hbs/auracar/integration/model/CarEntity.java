@@ -1,4 +1,4 @@
-package com.hbs.auracar.integration.entity;
+package com.hbs.auracar.integration.model;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -25,4 +25,6 @@ public class CarEntity {
     private Instant exit;
     @Column( "active" )
     private Boolean active;
+    @Column( "adviser" )
+    private String adviser;
 }

@@ -1,4 +1,4 @@
-package com.hbs.auracar.config.exception;
+package com.hbs.auracar.exception;
 
 import org.springframework.http.HttpStatus;
 

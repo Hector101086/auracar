@@ -1,17 +1,17 @@
 package com.hbs.auracar.service;
 
-import com.hbs.auracar.service.dto.CarDto;
+import com.hbs.auracar.service.dto.Car;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 public interface ICarService {
-    Flux<CarDto> getCars();
+    Flux<Car> getCars();
 
-    Mono<CarDto> getCar( Long IdCar );
+    Mono<Car> getCar( Long idCar );
 
-    Mono<CarDto> deleteCar( Long idCar );
+    Mono<Car> deleteCar( Long idCar );
 
-    Mono<CarDto> createCar( CarDto carDto );
+    Mono<Car> createCar( Car car );
 
-    Mono<CarDto> updateCar( CarDto carDto );
+    Mono<Car> updateCar( Car car );
 }
