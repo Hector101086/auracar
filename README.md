@@ -5,7 +5,7 @@
 1. Clonar el proyecto
 
 ```bash
-  git clone https://github.com/Hector101086/auracar.git
+  git clone https://github.com/hbarbas/auracar.git
 ```
 
 2. Instalar dependencias
