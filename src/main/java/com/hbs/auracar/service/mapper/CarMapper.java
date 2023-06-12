@@ -1,4 +1,4 @@
-package com.hbs.auracar.integration.mapper;
+package com.hbs.auracar.service.mapper;
 
 import com.hbs.auracar.integration.model.CarEntity;
 import com.hbs.auracar.service.dto.Car;
