@@ -2,19 +2,19 @@
 
 ## Run Locally
 
-1. Clonar el proyecto
+1. Clone the project
 
 ```bash
   git clone https://github.com/hbarbas/auracar.git
 ```
 
-2. Instalar dependencias
+2. Install dependencies
 
 ```bash
   mvn install
 ```
 
-3. Ejecutar con IDE
+3. Run with IDE
 
 
 ## API Reference
