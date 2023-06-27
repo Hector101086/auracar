@@ -1,4 +1,4 @@
-package com.hbs.auracar.config.api;
+package com.hbs.auracar.integration.config.api;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

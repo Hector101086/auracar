@@ -1,11 +1,11 @@
 package com.hbs.auracar.service.impl;
 
-import com.hbs.auracar.exception.ApiException;
-import com.hbs.auracar.integration.model.CarEntity;
-import com.hbs.auracar.integration.repository.CarRepository;
+import com.hbs.auracar.integration.config.exception.ApiException;
+import com.hbs.auracar.integration.mapper.MapStructMappers;
+import com.hbs.auracar.integration.persistence.entity.CarEntity;
+import com.hbs.auracar.integration.persistence.repository.CarRepository;
 import com.hbs.auracar.service.ICarService;
 import com.hbs.auracar.service.dto.Car;
-import com.hbs.auracar.service.mapper.MapStructMappers;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;

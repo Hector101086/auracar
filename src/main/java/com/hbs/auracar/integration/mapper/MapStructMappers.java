@@ -1,4 +1,4 @@
-package com.hbs.auracar.service.mapper;
+package com.hbs.auracar.integration.mapper;
 
 import lombok.Data;
 import org.springframework.stereotype.Component;

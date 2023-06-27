@@ -1,4 +1,4 @@
-package com.hbs.auracar.service.dto;
+package com.hbs.auracar.integration.config.exception.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.apache.commons.lang3.exception.ExceptionUtils;

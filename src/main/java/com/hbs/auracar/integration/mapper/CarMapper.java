@@ -1,6 +1,6 @@
-package com.hbs.auracar.service.mapper;
+package com.hbs.auracar.integration.mapper;
 
-import com.hbs.auracar.integration.model.CarEntity;
+import com.hbs.auracar.integration.persistence.entity.CarEntity;
 import com.hbs.auracar.service.dto.Car;
 import org.mapstruct.*;
 
