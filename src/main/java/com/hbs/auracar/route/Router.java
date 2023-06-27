@@ -2,8 +2,8 @@ package com.hbs.auracar.route;
 
 import com.hbs.auracar.handler.CarHandler;
 import com.hbs.auracar.handler.ErrorCodesHandler;
+import com.hbs.auracar.integration.config.exception.dto.ApiError;
 import com.hbs.auracar.service.IErrorCodesService;
-import com.hbs.auracar.service.dto.ApiError;
 import com.hbs.auracar.service.dto.Car;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

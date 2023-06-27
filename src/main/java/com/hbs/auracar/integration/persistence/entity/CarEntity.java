@@ -1,4 +1,4 @@
-package com.hbs.auracar.integration.model;
+package com.hbs.auracar.integration.persistence.entity;
 
 import lombok.Getter;
 import lombok.Setter;
